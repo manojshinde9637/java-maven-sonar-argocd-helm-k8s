@@ -5,17 +5,43 @@ metadata:
   labels:
     app: spring-boot-app
 spec:
-  replicas: {{ .Values.frontend.replicaCount }}
+  replicas: {{ .Values.frontend.replicaCount.stable }}
   selector:
     matchLabels:
       app: spring-boot-app
+      track: stable
   template:
     metadata:
       labels:
         app: spring-boot-app
+        track: stable
     spec:
       containers:
       - name: spring-boot-app
-        image: "{{ .Values.frontend.image.reposiotry }}:{{ .Values.frontend.image.tag }}"
+        image: "{{ .Values.frontend.image.reposiotry }}:{{ .Values.frontend.image.tagStable }}"
+        ports:
+        - containerPort: {{ .Values.frontend.service.port }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  spring-boot-app
+  labels:
+    app: spring-boot-app
+spec:
+  replicas: {{ .Values.frontend.replicaCount.canary }}
+  selector:
+    matchLabels:
+      app: spring-boot-app
+      track: canary
+  template:
+    metadata:
+      labels:
+        app: spring-boot-app
+        track: canary
+    spec:
+      containers:
+      - name: spring-boot-app
+        image: "{{ .Values.frontend.image.reposiotry }}:{{ .Values.frontend.image.tagcanary }}"
         ports:
         - containerPort: {{ .Values.frontend.service.port }}
