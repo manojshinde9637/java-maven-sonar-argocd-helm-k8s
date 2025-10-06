@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: spring-boot-app-service
 spec:
-  type: NodePort
+  type: {{ .Values.frontend.service.type }}
   ports:
   - name: http
-    port: 80
-    targetPort: 8080
+    port: {{ .Values.frontend.service.port }}
+    targetPort: {{ .Values.frontend.service.port }}
     protocol: TCP
   selector:
     app: spring-boot-app

@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spring-boot-app
+  name:  spring-boot-app
   labels:
     app: spring-boot-app
 spec:
-  replicas: 2
+  replicas: {{ .Values.frontend.replicaCount }}
   selector:
     matchLabels:
       app: spring-boot-app
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: docker9637/cicd:replaceImageTag
+        image: "{{ Values.frontend.image.reposiotry }}:{{ .Values.frontend.image.tag }}"
         ports:
-        - containerPort: 8080
+        - containerPort: {{ .Values.frontend.service.port }}

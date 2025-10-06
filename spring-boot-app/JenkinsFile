@@ -35,7 +35,7 @@ pipeline {
             // Login & Push using Jenkins credentials
             docker.withRegistry('https://index.docker.io/v1/', 'docker9637') {
                 dockerImage.push()
-                dockerImage.push("latest") // optional: also push 'latest' tag
+                
             }
         }
     }
@@ -55,10 +55,10 @@ pipeline {
                 BUILD_NUMBER=${BUILD_NUMBER}
 
                 # Update deployment.yml with new image tag
-                sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" spring-boot-app-manifests/deployment.yml
+                sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" spring-boot-app-manifests/values.yml
 
                 # Commit and push changes
-                git add spring-boot-app-manifests/deployment.yml
+                git add spring-boot-app-manifests/values.yml
                 git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                 git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
             '''
