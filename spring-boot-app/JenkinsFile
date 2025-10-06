@@ -33,7 +33,7 @@ pipeline {
             def dockerImage = docker.image("${DOCKER_IMAGE}")
 
             // Login & Push using Jenkins credentials
-            docker.withRegistry('https://index.docker.io/v1/', 'docker-cred') {
+            docker.withRegistry('https://index.docker.io/v1/', 'docker9637') {
                 dockerImage.push()
                 dockerImage.push("latest") // optional: also push 'latest' tag
             }
