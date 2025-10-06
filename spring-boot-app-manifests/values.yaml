@@ -2,7 +2,7 @@ frontend:
   replicaCount: 2
   image:
     reposiotry : docker9637/cicd
-    tag: 8
+    tag: 10
   service:
       port: 80  
       type : ClusterIP
