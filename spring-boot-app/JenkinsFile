@@ -55,7 +55,7 @@ pipeline {
                 BUILD_NUMBER=${BUILD_NUMBER}
 
                 # Update deployment.yml with new image tag
-                sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" spring-boot-app-manifests/values.yml
+                sed -i "s/tag:.*/tag: ${BUILD_NUMBER}/g" spring-boot-app-manifests/values.yml
 
                 # Commit and push changes
                 git add spring-boot-app-manifests/values.yml
