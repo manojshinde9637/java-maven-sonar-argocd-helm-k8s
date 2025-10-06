@@ -4,8 +4,8 @@ frontend:
     canary: 1
   image:
     reposiotry : docker9637/cicd
-    tagStable:
-    tagcanary:
+    tagStable: 11
+    tagcanary: 11
   service:
       port: 80  
       type : ClusterIP
