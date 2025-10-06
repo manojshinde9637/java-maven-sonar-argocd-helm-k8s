@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: "{{ Values.frontend.image.reposiotry }}:{{ .Values.frontend.image.tag }}"
+        image: "{{ .Values.frontend.image.reposiotry }}:{{ .Values.frontend.image.tag }}"
         ports:
         - containerPort: {{ .Values.frontend.service.port }}
